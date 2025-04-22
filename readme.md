@@ -19,6 +19,7 @@ Advanced deobfuscation tool for reversing Lua scripts protected by Prometheus Ob
 
 ## Usage
 ![image](https://github.com/user-attachments/assets/03ed97e0-06d6-44b9-999a-ab43f60921ca)
+![image](https://github.com/user-attachments/assets/721f6a96-e8a0-4567-9892-d6d6f82d7755)
 
 ```bash
 python pol.py obfuscated_script.lua
