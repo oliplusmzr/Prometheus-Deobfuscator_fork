@@ -41,7 +41,7 @@ from modules.tokenizers import (
     remove_junkcode,
     clean_tokenized_syntax,
 )
-from modules.vm_analyzer import LuaVMAnalyzer
+
 from collections import defaultdict
 
 
@@ -136,7 +136,7 @@ class Polymorphism_Reverse:
     def __init__(self) -> None:
         self.code: str = ""
         self.analyzer: CodeAnalyzer = CodeAnalyzer()
-        self.vm_analyzer: LuaVMAnalyzer = LuaVMAnalyzer()
+    
         self.utils: Utils = Utils()
         self.const_tracker = ConstantTracker()
         self.literal_decoder = HybridLiteralDecoder()
