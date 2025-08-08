@@ -6,6 +6,9 @@
 Advanced deobfuscation tool for reversing Lua scripts protected by Prometheus Obfuscator / MoonsecV3 / MoonsecV2
 
 
+### V2 Released
+https://github.com/0x251/Prometheus-DeobfuscatorV2
+
 ## Features
 
 - Multi-layer polymorphism reversal
