@@ -1,10 +1,12 @@
 name: Deobfuscate Script
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      script_url:
+        description: 'Deobfuscate edilecek Lua script dosyasının URL adresi'
+        required: true
+        type: string
 
 jobs:
   deobfuscate:
@@ -21,16 +23,20 @@ jobs:
       - name: Clone Prometheus Deobfuscator
         run: git clone https://github.com/0x251/Prometheus-Deobfuscator.git
 
+      - name: Download Obfuscated Script
+        run: |
+          # 'script_url' adındaki input değerini alıyor ve dosyayı indiriyor.
+          curl -L -o obfuscated_script.lua "${{ github.event.inputs.script_url }}"
+
       - name: Deobfuscate Script
         run: |
-          # Bu komutu kendi script dosyanızın adı ile güncelleyin.
-          # Örneğin: python Prometheus-Deobfuscator/deobfuscate.py -i my_obfuscated_script.lua -o deobfuscated_script.lua
-          python Prometheus-Deobfuscator/deobfuscate.py -i <sifreli_script_adi.lua> -o <sifresi_cozulmus_script_adi.lua>
+          # İndirdiğimiz dosyayı deobfuscate komutuna veriyor.
+          python Prometheus-Deobfuscator/deobfuscate.py -i obfuscated_script.lua -o deobfuscated_script.lua
 
       - name: Commit Deobfuscated Script
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add <sifresi_cozulmus_script_adi.lua>
+          git add deobfuscated_script.lua
           git commit -m "Deobfuscated script commit"
           git push
