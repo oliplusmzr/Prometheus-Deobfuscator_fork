@@ -1,0 +1,36 @@
+name: Deobfuscate Script
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deobfuscate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Clone Prometheus Deobfuscator
+        run: git clone https://github.com/0x251/Prometheus-Deobfuscator.git
+
+      - name: Deobfuscate Script
+        run: |
+          # Bu komutu kendi script dosyanızın adı ile güncelleyin.
+          # Örneğin: python Prometheus-Deobfuscator/deobfuscate.py -i my_obfuscated_script.lua -o deobfuscated_script.lua
+          python Prometheus-Deobfuscator/deobfuscate.py -i <sifreli_script_adi.lua> -o <sifresi_cozulmus_script_adi.lua>
+
+      - name: Commit Deobfuscated Script
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add <sifresi_cozulmus_script_adi.lua>
+          git commit -m "Deobfuscated script commit"
+          git push
